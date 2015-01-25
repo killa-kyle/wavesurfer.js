@@ -162,14 +162,15 @@ WaveSurfer.Region = {
             handleLeft.className = 'wavesurfer-handle wavesurfer-handle-start';
             handleRight.className = 'wavesurfer-handle wavesurfer-handle-end';
             var css = {
-                cursor: 'col-resize',
+                cursor: 'ew-resize',
                 position: 'absolute',
                 left: '0px',
                 top: '0px',
-                width: '1%',
+                width: '2%',
                 maxWidth: '4px',
                 height: '100%'
             };
+
             this.style(handleLeft, css);
             this.style(handleRight, css);
             this.style(handleRight, {

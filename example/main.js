@@ -7,8 +7,8 @@ var wavesurfer = Object.create(WaveSurfer);
 document.addEventListener('DOMContentLoaded', function () {
     var options = {
         container     : document.querySelector('#waveform'),
-        waveColor     : 'violet',
-        progressColor : 'purple',
+        waveColor     : 'lightblue',
+        progressColor : 'navy',
         loaderColor   : 'purple',
         cursorColor   : 'navy'
     };
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Play at once when ready
 // Won't work on iOS until you touch the page
 wavesurfer.on('ready', function () {
-    //wavesurfer.play();
+    // wavesurfer.play();
 });
 
 // Report errors

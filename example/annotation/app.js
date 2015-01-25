@@ -10,11 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Init wavesurfer
     wavesurfer.init({
         container: '#waveform',
-        height: 100,
+        height: 200,
         scrollParent: true,
         normalize: true,
         minimap: true,
-        backend: 'AudioElement'
+        // backend: 'AudioElement',
+        cursorColor: '#333',
+        cursorWidth: 1,
+        // minPxPerSec: 20,
+        pixelRatio: 1
+
+
     });
 
     wavesurfer.util.ajax({
@@ -22,19 +28,20 @@ document.addEventListener('DOMContentLoaded', function () {
         url: 'rashomon.json'
     }).on('success', function (data) {
         wavesurfer.load(
-            'http://www.archive.org/download/mshortworks_001_1202_librivox/msw001_03_rashomon_akutagawa_mt_64kb.mp3',
+            '../media/Lost.mp3',
             data
         );
     });
 
     /* Regions */
     wavesurfer.enableDragSelection({
-        color: randomColor(0.1)
+        color: randomColor(0.3),
+        resize: true
     });
 
     wavesurfer.on('ready', function () {
         if (localStorage.regions) {
-            loadRegions(JSON.parse(localStorage.regions));
+            // loadRegions(JSON.parse(localStorage.regions));
         } else {
             // loadRegions(
             //     extractRegions(
@@ -54,19 +61,38 @@ document.addEventListener('DOMContentLoaded', function () {
     wavesurfer.on('region-click', function (region, e) {
         e.stopPropagation();
         // Play on click, loop on shift click
-        e.shiftKey ? region.playLoop() : region.play();
+        // e.shiftKey ? region.playLoop() : region.play();
+        region.play();
     });
     wavesurfer.on('region-click', editAnnotation);
+    wavesurfer.on('region-dblclick', function (region, e){
+        e.stopPropagation();
+
+        region.playLoop();
+    });
     wavesurfer.on('region-updated', saveRegions);
     wavesurfer.on('region-removed', saveRegions);
     wavesurfer.on('region-in', showNote);
+    wavesurfer.on('region-in', function (region, e){
+       // something here
+    });
 
     wavesurfer.on('region-play', function (region) {
         region.once('out', function () {
             wavesurfer.play(region.start);
-            wavesurfer.pause();
+            // wavesurfer.pause();
         });
     });
+
+
+     wavesurfer.on('region-click', storeLoop);
+
+     function storeLoop(region) {
+        region.upadte({
+        color: randomColor(0.3),
+        start: 0
+    });
+     }
 
 
     /* Minimap plugin */
@@ -79,21 +105,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /* Timeline plugin */
-    wavesurfer.on('ready', function () {
-        var timeline = Object.create(WaveSurfer.Timeline);
-        timeline.init({
-            wavesurfer: wavesurfer,
-            container: "#wave-timeline"
-        });
-    });
+    // wavesurfer.on('ready', function () {
+    //     var timeline = Object.create(WaveSurfer.Timeline);
+    //     timeline.init({
+    //         wavesurfer: wavesurfer,
+    //         container: "#wave-timeline"
+    //     });
+    // });
 
 
     /* Toggle play/pause buttons. */
     var playButton = document.querySelector('#play');
     var pauseButton = document.querySelector('#pause');
+    var currentTime = document.querySelector('#currentTime');
+    var totalTime = document.querySelector('#totalTime');
+
     wavesurfer.on('play', function () {
         playButton.style.display = 'none';
         pauseButton.style.display = '';
+
     });
     wavesurfer.on('pause', function () {
         playButton.style.display = '';

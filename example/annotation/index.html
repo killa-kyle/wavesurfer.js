@@ -10,14 +10,17 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="../css/style.css" />
-        <link rel="stylesheet" href="../css/ribbon.css" />
         <link rel="screenshot" itemprop="screenshot" href="http://katspaugh.github.io/wavesurfer.js/example/screenshot.png" />
 
+
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        
         <!-- wavesurfer.js -->
         <script src="../../build/wavesurfer.min.js"></script>
 
         <!-- plugins -->
-        <script src="../../plugin/wavesurfer.timeline.js"></script>
+        <!-- <script src="../../plugin/wavesurfer.timeline.js"></script> -->
         <script src="../../plugin/wavesurfer.regions.js"></script>
         <script src="../../plugin/wavesurfer.minimap.js"></script>
 
@@ -30,27 +33,34 @@
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
-                    <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
+                    <!-- <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li> -->
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
                 </ul>
 
-                <h1 itemprop="name">wavesurfer.js Annotations Tool</h1>
+                <h1 itemprop="name">seven8 - Choreography Aid</h1>
+                <p>
+                    Click on a region to enter an annotation.
+                    Shift-click plays a region in a loop.
+                </p>
             </div>
 
             <div id="demo">
                 <p id="subtitle" class="text-center text-info">&nbsp;</p>
 
-                <div id="wave-timeline"></div>
+                
 
                 <div id="waveform">
                     <!-- Here be waveform -->
                 </div>
-
+                <div id="wave-timeline"></div>
                 <div class="row" style="margin: 30px 0">
                     <div class="col-sm-8">
-                        <p>
-                            Click on a region to enter an annotation.<br />
-                            Shift-click plays a region in a loop.
-                        </p>
+
+                        <button  id="loop1" type="button" class="btn btn-info">Loop 1</button>
+                        <button id="loop2" type="button" class="btn btn-info">Loop 2</button>
+                        <button id="loop3" type="button" class="btn btn-info">Loop 3</button>
+
                     </div>
 
                     <div class="col-sm-2">
@@ -68,34 +78,54 @@
                     </div>
 
                     <div class="col-sm-2">
-                        <button class="btn btn-info btn-block" data-action="export" title="Export annotations to JSON">
+<!--                         <button class="btn btn-info btn-block" data-action="export" title="Export annotations to JSON">
                             <i class="glyphicon glyphicon-file"></i>
                             Export
-                        </button>
+                        </button> -->
+                        <span id="currentTime"></span>
+                        <span id="totalTime"></span>
                     </div>
                 </div>
             </div>
 
+
+            <!-- begin annotations -->
             <form role="form" name="edit" style="opacity: 0; transition: opacity 300ms linear; margin: 30px 0;">
-                <div class="form-group">
-                    <label for="start">Start</label>
-                    <input class="form-control" id="start" name="start" />
+                <div class="row">            
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="start">Start</label>
+                            <input class="form-control" id="start" name="start" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-success btn-block">Save</button>
+                        <center><i>or</i></center>
+                        <button type="button" class="btn btn-danger btn-block" data-action="delete-region">Delete</button>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="end">End</label>
-                    <input class="form-control" id="end" name="end" />
+                    
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="end">End</label>
+                            <input class="form-control" id="end" name="end" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="note">Note</label>
+                            <textarea id="note" class="form-control" rows="3" name="note"></textarea>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="note">Note</label>
-                    <textarea id="note" class="form-control" rows="3" name="note"></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-success btn-block">Save</button>
-                <center><i>or</i></center>
-                <button type="button" class="btn btn-danger btn-block" data-action="delete-region">Delete</button>
             </form>
+            <!-- / annotations -->
 
             <div class="footer row">
                 <div class="col-sm-12">
@@ -114,11 +144,7 @@
             </div>
         </div>
 
-        <div class="github-fork-ribbon-wrapper right">
-            <div class="github-fork-ribbon">
-                <a itemprop="isBasedOnUrl" href="https://github.com/katspaugh/wavesurfer.js">Fork me on GitHub</a>
-            </div>
-        </div>
+
 
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
