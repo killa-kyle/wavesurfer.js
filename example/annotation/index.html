@@ -15,7 +15,7 @@
 
         <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        
+
         <!-- wavesurfer.js -->
         <script src="../../build/wavesurfer.min.js"></script>
 
@@ -30,7 +30,7 @@
     </head>
 
     <body itemscope itemtype="http://schema.org/WebApplication">
-        <div class="container">
+        <div class="container-fluid">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
                     <!-- <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li> -->
@@ -38,9 +38,9 @@
                     <li><a href="#">About</a></li>
                 </ul>
 
-                <h1 itemprop="name">seven8 - Choreography Aid</h1>
+                <h1 itemprop="name">seven8 - Dance App</h1>
                 <p>
-                    Click on a region to enter an annotation.
+                    Double Click on a region to edit it.
                     Shift-click plays a region in a loop.
                 </p>
             </div>
@@ -50,12 +50,14 @@
 
                 
 
-                <div id="waveform">
+                <div id="waveform" class="effect2">
+ 
                     <!-- Here be waveform -->
                 </div>
                 <div id="wave-timeline"></div>
                 <div class="row" style="margin: 30px 0">
                     <div class="col-sm-8">
+
 
                         <button  id="loop1" type="button" class="btn btn-info">Loop 1</button>
                         <button id="loop2" type="button" class="btn btn-info">Loop 2</button>
@@ -82,6 +84,7 @@
                             <i class="glyphicon glyphicon-file"></i>
                             Export
                         </button> -->
+                        <button id="clear" class="btn btn-warning btn-block" data-action="clear">CLEAR LOOPS</button>
                         <span id="currentTime"></span>
                         <span id="totalTime"></span>
                     </div>

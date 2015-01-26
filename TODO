@@ -5,3 +5,4 @@ If ( current position is inside region) {
     get next upcoming region,
     set that region to loop when playhead gets there
 }
+

@@ -2,7 +2,10 @@
 body {
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: #f8f8f8;
+    background-color: #D7D7D7;
+    color: #222129;
+    font-family: 'futura pt',sans-serif;
+    font-size: 20px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -90,7 +93,48 @@ body {
 
 #waveform {
     position: relative;
+    background-color: #373641;
+    border-radius: 8px;
+
 }
+/*==================================================
+ * Effect 2
+ * ===============================================*/
+.effect2
+{
+  position: relative;
+}
+.effect2:before, .effect2:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.effect2:after
+{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
 .waveform {
     height: 400px;
 }
@@ -112,8 +156,13 @@ body {
     border-color: #333;
 }
 
-.wavesurfer-handle {
-    width: 10px;
-    border-left: 1px solid orange;
-    border-right: 1px solid orange;
+.wavesurfer-handle-start {
+    border-left: 4px solid orange;
+}
+.wavesurfer-handle-end {
+    border-right: 4px solid orange;
+}
+
+.wavesurfer-region {
+    background-color: rgba(255,255,255,0.8);
 }
